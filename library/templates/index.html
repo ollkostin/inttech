@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека</title>
+</head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+
+</style>
+<body>
+<h1 style="text-align: center">Библиотека</h1>
+<div>
+    <form method="get">
+        <select id="genre" name="genre" multiple>
+            {% for genre in genres %}
+            <option value="{{genre.id}}">{{ genre.name }}</option>
+            {% endfor %}
+        </select>
+        <select id="author" name="author" multiple>
+            {% for author in authors %}
+            <option value="{{author.id}}">{{ author.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="book_name_sort">Сортировка по названию в алфавитном порядке:</label>
+        <select id="book_name_sort" name="book_name_sort">
+            <option value="asc">Прямой</option>
+            <option value="desc">Обратный</option>
+        </select>
+        <button type="submit">Поиск</button>
+        <button type="reset">Сброс</button>
+    </form>
+</div>
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Жанр</th>
+        <th>Автор</th>
+    </tr>
+    {% for el in data %}
+    <tr>
+        <td>{{ el.name }}</td>
+        <td>{{ el.genre.name }}</td>
+        <td>{{ el.author.name }}</td>
+    </tr>
+    {% empty %}
+    <tr><td>Книги по запросу не найдены</td></tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
